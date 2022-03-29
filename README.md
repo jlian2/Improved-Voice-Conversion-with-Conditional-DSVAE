@@ -1,6 +1,6 @@
-# Robust Disentangled Variational Speech Representation Learning for Zero-Shot Voice Conversion
+# Towards Improved Voice Conversion with Conditional DSVAE
 
-Demo is here  https://jlian2.github.io/Robust-Voice-Style-Transfer/.
+This is based on our previous work:
 
 
 ```
@@ -13,4 +13,7 @@ Demo is here  https://jlian2.github.io/Robust-Voice-Style-Transfer/.
 }
 ```
 
-https://jlian2.github.io/Improved-Voice-Conversion-with-Conditional-DSVAE/.
+The previous demo is here https://jlian2.github.io/Robust-Voice-Style-Transfer/. 
+
+Demo for this work: https://jlian2.github.io/Improved-Voice-Conversion-with-Conditional-DSVAE/. 
+
