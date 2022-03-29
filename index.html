@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<!-- saved from url=(0033)https://syang1993.github.io/glow_wavegan/ -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Robust Disentangled Variational Speech Representation Learning for Zero-Shot Voice Conversion</title>
+<meta name="generator" content="Jekyll v3.9.0">
+<meta property="og:title" content="Robust Disentangled Variational Speech Representation Learning for Zero-Shot Voice Conversion">
+<meta property="og:locale" content="en_US">
+<link rel="canonical" href="https://syang1993.github.io/glow_wavegan/">
+<meta property="og:url" content="https://syang1993.github.io/glow_wavegan/">
+<meta name="twitter:card" content="summary">
+<!-- End Jekyll SEO tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body data-new-gr-c-s-check-loaded="14.1001.0" data-gr-ext-installed="">
+    <section class="page-header">
+    <!-- <h1 class="project-name">Demo PAGE</h1> -->
+    <!-- <h2 class="project-tagline"></h2> -->
+      
+      
+    </section>
+    <section class="main-content">
+      <h1 id=""><center> Robust Disentangled Variational Speech Representation Learning for Zero-Shot Voice Conversion </center></h1>
+<center> Jiachen Lian<sup>1</sup><sup>2</sup>, Chunlei Zhang<sup>2</sup>, Dong Yu<sup>2</sup> </center>
+<center> <sup>1</sup> Berkeley EECS, CA </center>
+<center> <sup>2</sup> Tencent AI Lab, Bellevue, WA</center>
+<h2 id="abstract">Abstract</h2>
+<p>This work proposed a novel self-supervised zero-shot voice conversion that does not rely on speaker labels and pre-trained speaker embeddings. Such method is robust to noisy speech and even outperforms all previous voice conversion methods that rely on supervisory speaker signals.</p>
+<h2><p class="toc_title">Contents</p></h2>
+<div id="toc_container">
+<ul>
+  <li><a href="#1">Voice Identity Transfer(Zero-Shot)</a></li>
+  <li><a href="#2">Noise Invariant Voice Style Transfer(Zero-Shot)</a></li>
+  <li><a href="#3">Unconditional Speech Generation</a></li>
+</ul>
+</div>
+<br>
+<h2><p class="toc_title">Comments</p></h2>
+<div id="toc_container"
+<ul>
+  <li>This is self-supervised Voice Conversion: No speaker labels used in the training and no pretrained speaker embeddings are used.  </a></li>
+  <li>Unconditional speech generation was also performed. Due to limit of space, we did not list them in the paper, but it can be checked here in Section 3.   </a></li>
+  <li>Though not stated in the paper, we later on observed improvement in speech quality when applying HifiGAN, of which results are also attached </a></li>
+</ul>
+</div>
+<br>
+<br>
+<a name="1"><h2>1. Voice Identity Transfer(Zero-Shot)</h2></a>
+<a name="1.1"><h3>1.1 Male and Female</h3></a>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Source</strong></th>
+      <th style="text-align: center"><strong>Target</strong></th>
+      <th style="text-align: center"><strong>Conversion(Wavenet)</strong></th>
+      <th style="text-align: center"><strong>Conversion(HifiGAN)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p293/p293_016.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p271/p271_015.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/demo_baseline/F2M/p293_p271.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/demo_baseline/F2M/p293_p271_hifi.wav" controls="" preload=""></audio></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p317/p317_134.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p274/p274_134.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/demo_baseline/F2M/p317_p274.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/demo_baseline/F2M/p317_p274_hifi.wav" controls="" preload=""></audio></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p241/p241_050.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p317/p317_134.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/demo_baseline/M2F/p241_p317.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/demo_baseline/M2F/p241_p317_hifi.wav" controls="" preload=""></audio></td>
+    </tr>
+    <!-- <tr>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p274/p274_134.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p225/p225_127.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/demo_baseline/M2F/p274_p225.wav" controls="" preload=""></audio></td>
+    </tr> -->
+  </tbody>
+</table>
+<br>
+<a name="1.2"><h3>1.2 Male and Male</h3></a>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Source</strong></th>
+      <th style="text-align: center"><strong>Target</strong></th>
+      <th style="text-align: center"><strong>Conversion(Wavenet)</strong></th> 
+      <th style="text-align: center"><strong>Conversion(HifiGAN)</strong></th> 
+    </tr>
+  </thead>
+  <tbodyi>
+    <tr>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p259/p259_021.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p271/p271_015.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/demo_baseline/M2M/p259_p271.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/demo_baseline/M2M/p259_p271_hifi.wav" controls="" preload=""></audio></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p271/p271_015.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p241/p241_050.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/demo_baseline/M2M/p271_p241.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/demo_baseline/M2M/p271_p241_hifi.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<a name="1.3"><h3>1.3 Female and Female</h3></a>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Source</strong></th>
+      <th style="text-align: center"><strong>Target</strong></th>
+      <th style="text-align: center"><strong>Conversion(Wavenet)</strong></th> 
+      <th style="text-align: center"><strong>Conversion(HifiGAN)</strong></th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p317/p317_134.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p293/p293_212.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/demo_baseline/F2F/p317_p293_1.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/demo_baseline/F2F/p317_p293_1_hifi.wav" controls="" preload=""></audio></td>
+    </tr>
+    <!-- <tr>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p293/p293_016.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p225/p225_127.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/demo_baseline/F2F/p293_p225.wav" controls="" preload=""></audio></td>
+    </tr> -->
+    <tr>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p293/p293_212.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p317/p317_134.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/demo_baseline/F2F/p293_p317_2.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/demo_baseline/F2F/p293_p317_2_hifi.wav" controls="" preload=""></audio></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p293/p293_016.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/wavs/p317/p317_134.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/demo_baseline/F2F/p293_p317.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/identity/demo_baseline/F2F/p293_p317_hifi.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+<a name="2"><h2>2. Noise Invariant Voice Style Transfer(Zero-Shot)</h2></a>
+<a name="2.1"><h3>2.1 Male to Female</h3></a>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Source(Clean)</strong></th>
+      <th style="text-align: center"><strong>Target(Clean)</strong></th>
+      <th style="text-align: center"><strong>Conversion(Wavenet)</strong></th>
+      <th style="text-align: center"><strong>Conversion(HifiGAN)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p274_134_mic1.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p293_034_mic1.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p274_134_to_p293_0340_clean.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p274_134_to_p293_0340_clean_hifi.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Source(5db)</strong></th>
+      <th style="text-align: center"><strong>Target(Clean)</strong></th>
+      <th style="text-align: center"><strong>Conversion(Wavenet)</strong></th>
+      <th style="text-align: center"><strong>Conversion(HifiGAN)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p274_134_mic1.5.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p293_034_mic1.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p274_134_to_p293_0340_5.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p274_134_to_p293_0340_5_hifi.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Source(15db)</strong></th>
+      <th style="text-align: center"><strong>Target(clean)</strong></th>
+      <th style="text-align: center"><strong>Conversion(Wavenet)</strong></th>
+      <th style="text-align: center"><strong>Conversion(HifiGAN)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p274_134_mic1.15.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p293_034_mic1.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p274_134_to_p293_0340_15.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p274_134_to_p293_0340_15_hifi.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<a name="2.2"><h3>2.2 Female to Male</h3></a>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Source(Clean)</strong></th>
+      <th style="text-align: center"><strong>Target(Clean)</strong></th>
+      <th style="text-align: center"><strong>Conversion(Wavenet)</strong></th>
+      <th style="text-align: center"><strong>Conversion(HifiGAN)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p317_134_mic1.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p334_172_mic1.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p317_134_to_p334_1720_clean.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p317_134_to_p334_1720_clean_hifi.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Source(5db)</strong></th>
+      <th style="text-align: center"><strong>Target(Clean)</strong></th>
+      <th style="text-align: center"><strong>Conversion(Wavenet)</strong></th>
+      <th style="text-align: center"><strong>Conversion(HifiGAN)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p317_134_mic1_6.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p334_172_mic1.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p317_134_to_p334_1720_5.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p317_134_to_p334_1720_5_hifi.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Source(15db)</strong></th>
+      <th style="text-align: center"><strong>Target(Clean)</strong></th>
+      <th style="text-align: center"><strong>Conversion(Wavenet)</strong></th>
+      <th style="text-align: center"><strong>Conversion(HifiGAN)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p317_134_mic1_15.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p334_172_mic1.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p317_134_to_p334_1720_15.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noise_invariant/p317_134_to_p334_1720_15_hifi.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+
+<br>
+<a name="3"><h2>3. Unconditional Speech Generation</h2></a>
+VAE allows to generate infinite number of new speakers during testing. We just sample speaker embeddings from a given prior distribution with a specified mean vector and standard deviation vector. 
+We observed that the standard deviation does not influence the speaker identity too much while the mean is closely related to the speaker identity. Especially, we found that positive "mean" corresponds to male voice,
+and negative "mean" corresponds to female voice. The experiment takes two utterance as input. Then we set 5 different mean vectors(-1.5, -0.5, 0.0, 0.5, 1.5, up to down in the belowing figure) of length 64 and standard deviation(0.5) vector of the same size. 
+Then we just concatenate sampled spaker embedding and the extracted content embedding to synthesize the mel-spectrogram. For each mean-vector, we sample two speakers using the same random seed. The result is as follows:
+<br>
+<br>
+<!-- <img src="samples/uncondition.png"/width="300px"height="180px" /> -->
+<img src="samples/uncondition.png"/>
+<br>
+As shown in the figure, the first row are two re-synthesized mel-spectrograms. For each one we just extract the content embedding while using the sampled speaker embeddings of 5 different means. For two utterances, as long as the "means" are the same, the identities of the synthesized speech 
+are also the same, which can be verified by looking at the synthesized mel-spectrograms at the corresponding position. When mean is zero, the sampled speaker embedding can randomly be positive(male) or negative(female). 
+<br>
+      <footer class="site-footer">        
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com/">GitHub Pages</a>.</span>
+      </footer>
+    </section>
+</body></html>

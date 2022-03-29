@@ -1,5 +1,14 @@
-# Improved-Voice-Conversion-with-Conditional-DSVAE
+# Robust Disentangled Variational Speech Representation Learning for Zero-Shot Voice Conversion
 
-This is the improved version of Voice Conversion based on the prior work: https://jlian2.github.io/Robust-Voice-Style-Transfer/. 
+Demo is here  https://jlian2.github.io/Robust-Voice-Style-Transfer/.
 
-The Demo page is here:  
+
+```
+@inproceedings{D-DSVAE-VC,
+  title={Robust Disentangled Variational Speech Representation Learning for Zero-shot Voice Conversion},
+  author={Lian, Jiachen and Zhang, Chunlei and Yu, Dong},
+  booktitle={IEEE ICASSP},
+  year={2022},
+  organization={IEEE}
+}
+```
