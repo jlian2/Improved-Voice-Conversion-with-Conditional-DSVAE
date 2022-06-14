@@ -1,5 +1,9 @@
 # Towards Improved Voice Conversion with Conditional DSVAE
 
+Paper for this work: 
+https://arxiv.org/abs/2205.05227 
+
+
 This is based on our previous work:
 
 
